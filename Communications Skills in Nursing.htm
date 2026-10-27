@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title> Communications SkillS in Nursing</title>
+    <style>
+        /* ===== BASE ===== */
+        :root {
+            --bg1: #0a0e1a;
+            --bg2: #141e33;
+            --primary: #00d4ff;
+            --primary-dark: #0099cc;
+            --accent: #facc15;
+            --danger: #f87171;
+            --success: #34d399;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text: #e8edf5;
+            --muted: #94a3b8;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            --glow: 0 0 30px rgba(0, 212, 255, 0.06);
+            --radius: 16px;
+            --header-bg: rgba(255, 255, 255, 0.03);
+            --header-border: rgba(255, 255, 255, 0.04);
+            --footer-border: rgba(255, 255, 255, 0.03);
+            --table-header-bg: rgba(0, 212, 255, 0.08);
+            --card-title-bg: rgba(0, 212, 255, 0.06);
+            --highlight-bg: #facc15;
+            --highlight-text: #0f172a;
+        }
+
+        [data-theme="light"] {
+            --bg1: #f0f4f8;
+            --bg2: #e2e8f0;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-border: rgba(0, 0, 0, 0.1);
+            --text: #0f172a;
+            --muted: #475569;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --glow: 0 0 30px rgba(0, 212, 255, 0.02);
+            --header-bg: rgba(255, 255, 255, 0.7);
+            --header-border: rgba(0, 0, 0, 0.04);
+            --footer-border: rgba(0, 0, 0, 0.04);
+            --table-header-bg: rgba(0, 212, 255, 0.12);
+            --card-title-bg: rgba(0, 212, 255, 0.08);
+            --highlight-bg: #facc15;
+            --highlight-text: #0f172a;
+        }
+
+        .highlight-text {
+            background-color: var(--highlight-bg);
+            color: var(--highlight-text);
+            padding: 0 4px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, 'Cairo', sans-serif;
+            background: linear-gradient(135deg, var(--bg1), var(--bg2), #0f1a2b);
+            min-height: 100vh;
+            color: var(--text);
+            padding: 16px 8px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            transition: background 0.4s ease;
+        }
+        .app { max-width: 1100px; width: 100%; }
+
+        /* ===== HEADER ===== */
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 16px 16px;
+            background: var(--header-bg);
+            border-radius: 20px;
+            border: 1px solid var(--header-border);
+            backdrop-filter: blur(4px);
+        }
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            text-shadow: 0 4px 25px rgba(0, 212, 255, 0.15);
+            transition: color 0.3s ease;
+        }
+        [data-theme="light"] .header h1 { color: #0f172a; text-shadow: none; }
+        .header h1 .highlight {
+            background: linear-gradient(135deg, var(--primary), #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header .sub {
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            font-size: 0.8rem;
+            margin-top: 2px;
+        }
+        .header .creator {
+            color: var(--muted);
+            font-size: 0.75rem;
+            margin-top: 4px;
+        }
+        .header .creator .name { color: var(--text); font-weight: 700; }
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+        }
+        .theme-toggle:hover {
+            border-color: var(--primary);
+            background: rgba(0, 212, 255, 0.08);
+            transform: scale(1.05);
+        }
+        [data-theme="light"] .theme-toggle {
+            background: rgba(0, 0, 0, 0.04);
+            border-color: rgba(0, 0, 0, 0.06);
+        }
+
+        /* ===== TABS ===== */
+        .tabs-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+            justify-content: center;
+        }
+        .tab-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 30px;
+            padding: 8px 14px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            line-height: 1.3;
+        }
+        .tab-btn:hover { border-color: var(--primary); color: var(--text); }
+        .tab-btn.active {
+            border-color: var(--primary);
+            background: rgba(0, 212, 255, 0.08);
+            color: var(--primary);
+        }
+        .tab-btn .en { display: block; font-size: 0.7rem; }
+        .tab-btn .ar { display: block; font-size: 0.55rem; opacity: 0.7; }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow), var(--glow);
+            padding: 18px 14px;
+            margin-bottom: 16px;
+            transition: background 0.3s ease, border 0.3s ease;
+            display: none;
+        }
+        .card.active { display: block; }
+        .card h2 {
+            font-size: 1.3rem;
+            color: var(--text);
+            border-right: 4px solid var(--primary);
+            padding-right: 12px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        /* ===== SLIDES ===== */
+        .slide-container {
+            position: relative;
+            min-height: 300px;
+        }
+        .slide {
+            display: none;
+            animation: fadeSlide 0.3s ease;
+        }
+        .slide.active { display: block; }
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateX(15px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .slide-progress {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+        .slide-progress .bar {
+            flex: 1;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            margin: 0 12px;
+            overflow: hidden;
+        }
+        .slide-progress .bar .fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), #818cf8);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        .slide-progress .count {
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .slide-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+        .slide-nav .btn-nav {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 80px;
+            text-align: center;
+        }
+        .slide-nav .btn-nav:hover:not(:disabled) {
+            background: rgba(0, 212, 255, 0.08);
+            border-color: var(--primary);
+        }
+        .slide-nav .btn-nav:disabled {
+            opacity: 0.3;
+            cursor: default;
+        }
+        .slide-nav .btn-nav.primary {
+            background: var(--primary);
+            color: #0a0e1a;
+            border-color: var(--primary);
+        }
+        .slide-nav .btn-nav.primary:hover:not(:disabled) {
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+        [data-theme="light"] .slide-nav .btn-nav {
+            background: rgba(0, 0, 0, 0.02);
+            border-color: rgba(0, 0, 0, 0.06);
+        }
+
+        /* ===== CARDS GRID ===== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 14px;
+            margin-bottom: 8px;
+        }
+
+        .topic-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 14px 14px 12px;
+            transition: border-color 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .topic-card:hover { border-color: var(--primary); }
+
+        .topic-card .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--card-title-bg);
+        }
+        .topic-card .card-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--primary);
+            line-height: 1.4;
+            flex: 1;
+        }
+        .topic-card .card-title-ar {
+            color: var(--muted);
+            font-weight: 400;
+            display: none;
+        }
+        .topic-card .card-title-ar.show { display: inline; }
+        .topic-card .card-title-en { display: inline; }
+        .topic-card .card-title-en.hidden { display: none; }
+
+        .topic-card .translate-btn {
+            background: rgba(0, 212, 255, 0.08);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 3px 12px;
+            font-size: 0.6rem;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+            margin-right: 8px;
+        }
+        .topic-card .translate-btn:hover {
+            background: rgba(0, 212, 255, 0.18);
+            border-color: var(--primary);
+        }
+        .topic-card .translate-btn.active {
+            background: rgba(0, 212, 255, 0.18);
+            border-color: var(--primary);
+        }
+
+        .topic-card .card-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex: 1;
+        }
+        .topic-card .card-items li {
+            padding: 4px 0 4px 0;
+            line-height: 1.6;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+        [data-theme="light"] .topic-card .card-items li {
+            border-bottom-color: rgba(0, 0, 0, 0.04);
+        }
+        .topic-card .card-items li:last-child { border-bottom: none; }
+
+        .topic-card .item-en {
+            font-weight: 600;
+            color: var(--text);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            display: block;
+            text-align: left;
+            direction: ltr;
+        }
+        .topic-card .item-ar {
+            color: var(--muted);
+            font-size: 0.82rem;
+            line-height: 1.6;
+            text-align: right;
+            direction: rtl;
+            display: none;
+            margin-top: 2px;
+            padding-right: 8px;
+            border-right: 2px solid rgba(0, 212, 255, 0.2);
+        }
+        .topic-card .item-ar.show { display: block; }
+
+        .topic-card .card-items.numbered {
+            counter-reset: item-counter;
+        }
+        .topic-card .card-items.numbered li {
+            padding-right: 28px;
+            position: relative;
+            counter-increment: item-counter;
+        }
+        .topic-card .card-items.numbered li::before {
+            content: counter(item-counter) "-";
+            position: absolute;
+            right: 2px;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        /* ===== TABLES ===== */
+        .info-table-wrap {
+            overflow-x: auto;
+            margin: 12px 0;
+            border-radius: 10px;
+            border: 1px solid var(--card-border);
+            grid-column: 1 / -1;
+        }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            min-width: 500px;
+        }
+        .info-table th {
+            background: var(--table-header-bg);
+            color: var(--primary);
+            padding: 8px 6px;
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+            font-weight: 700;
+        }
+        .info-table td {
+            padding: 8px 6px;
+            border-bottom: 1px solid var(--card-border);
+            vertical-align: top;
+            line-height: 1.5;
+        }
+        .info-table tr:last-child td { border-bottom: none; }
+        .info-table .ar-text {
+            border-right: none;
+            padding-right: 0;
+            margin-top: 2px;
+            font-size: 0.78rem;
+            display: block;
+            color: var(--muted);
+        }
+        .info-table .en-text { font-size: 0.85rem; }
+
+        @media (max-width: 600px) {
+            .cards-grid { grid-template-columns: 1fr; }
+            .info-table { font-size: 0.72rem; min-width: 350px; }
+            .topic-card .card-title { font-size: 0.85rem; }
+        }
+
+        .footer-credit {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.12);
+            font-size: 0.7rem;
+            margin-top: 24px;
+            padding: 10px 0;
+            border-top: 1px solid var(--footer-border);
+        }
+        [data-theme="light"] .footer-credit { color: rgba(0, 0, 0, 0.2); }
+        .footer-credit .name { color: var(--primary); font-weight: 600; }
+
+        @media (max-width: 768px) {
+            body { padding: 8px 4px; }
+            .header h1 { font-size: 1.4rem; }
+            .tab-btn { padding: 6px 10px; font-size: 0.6rem; }
+            .card { padding: 14px 10px; }
+            .card h2 { font-size: 1.1rem; }
+        }
+
+        .topic-card.full-width { grid-column: 1 / -1; }
+    </style>
+</head>
+<body>
+
+    <div class="app">
+        <div class="header">
+            <div class="header-top">
+                <div>
+                    <h1><span class="highlight">Communication Skills</span></h1>
+                    <div class="sub"></div>
+                    <div class="creator">Created by <span class="name">MR. YASSIN THARWAT</span></div>
+                </div>
+                <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="تبديل الوضع">☀</button>
+            </div>
+        </div>
+
+        <div class="tabs-wrap" id="tabsContainer"></div>
+        <div id="sectionsContainer"></div>
+        <div class="footer-credit">
+            Created by <span class="name">MR. YASSIN THARWAT</span>
+        </div>
+    </div>
+
+    <script>
+        // ================================================================
+        //  THEME
+        // ================================================================
+        let currentTheme = localStorage.getItem('theme') || 'dark';
+
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            document.getElementById('themeToggle').textContent = theme === 'light' ? '☾' : '☀';
+            localStorage.setItem('theme', theme);
+            currentTheme = theme;
+        }
+        function toggleTheme() { applyTheme(currentTheme === 'dark' ? 'light' : 'dark'); }
+
+        // ================================================================
+        //  SLIDE SYSTEM
+        // ================================================================
+        let slideState = {};
+
+        function initSlideState(partId, totalSlides) {
+            slideState[partId] = { current: 0, total: totalSlides };
+        }
+
+        function renderSlide(partId, containerId) {
+            const state = slideState[partId];
+            if (!state) return;
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            const slides = container.querySelectorAll('.slide');
+            slides.forEach((s, i) => s.classList.toggle('active', i === state.current));
+            const progressBar = container.querySelector('.slide-progress .fill');
+            const countSpan = container.querySelector('.slide-progress .count');
+            if (progressBar) progressBar.style.width = ((state.current + 1) / state.total * 100) + '%';
+            if (countSpan) countSpan.textContent = `${state.current + 1} / ${state.total}`;
+            const prevBtn = container.querySelector('.btn-nav.prev');
+            const nextBtn = container.querySelector('.btn-nav.next');
+            if (prevBtn) prevBtn.disabled = state.current === 0;
+            if (nextBtn) nextBtn.disabled = state.current === state.total - 1;
+        }
+
+        function goToSlide(partId, containerId, index) {
+            const state = slideState[partId];
+            if (!state) return;
+            if (index < 0) index = 0;
+            if (index >= state.total) index = state.total - 1;
+            state.current = index;
+            renderSlide(partId, containerId);
+        }
+
+        // ================================================================
+        //  HELPERS
+        // ================================================================
+        function createSlideHTML(title, cardsHTML) {
+            return `
+                <div class="slide">
+                    <h3 style="font-size:1.1rem; color:var(--primary); margin-bottom:12px; border-right:3px solid var(--primary); padding-right:10px;">${title}</h3>
+                    <div class="cards-grid">${cardsHTML}</div>
+                </div>
+            `;
+        }
+
+        function card(title, items, arTitle = '') {
+            const cardId = 'c' + Math.random().toString(36).substr(2, 8);
+            const itemsHTML = items.map((item) => {
+                const en = item.en || item;
+                const ar = item.ar || '';
+                return `<li><span class="item-en">${en}</span><span class="item-ar">${ar}</span></li>`;
+            }).join('');
+            const listClass = items.some(i => i.en && i.en.match(/^\d/)) ? 'card-items numbered' : 'card-items simple';
+            return `
+                <div class="topic-card" data-card="${cardId}">
+                    <div class="card-header">
+                        <span class="card-title">
+                            <span class="card-title-en">${title}</span>
+                            <span class="card-title-ar" id="${cardId}-title-ar">${arTitle}</span>
+                        </span>
+                        <button class="translate-btn" data-card="${cardId}" onclick="toggleCardTranslation('${cardId}')">ترجمة</button>
+                    </div>
+                    <ul class="${listClass}">${itemsHTML}</ul>
+                </div>
+            `;
+        }
+
+        function tableCard(title, tableHTML, arTitle = '') {
+            return `
+                <div class="topic-card full-width">
+                    <div class="card-header">
+                        <span class="card-title">
+                            <span class="card-title-en">${title}</span>
+                            <span class="card-title-ar" style="display:block;">${arTitle}</span>
+                        </span>
+                    </div>
+                    <div class="info-table-wrap">${tableHTML}</div>
+                </div>
+            `;
+        }
+
+        function cell(en, ar) {
+            return `<span class="en-text">${en}</span><span class="ar-text">${ar}</span>`;
+        }
+
+        function toggleCardTranslation(cardId) {
+            const card = document.querySelector(`.topic-card[data-card="${cardId}"]`);
+            if (!card) return;
+            const arItems = card.querySelectorAll('.item-ar');
+            const titleAr = document.getElementById(`${cardId}-title-ar`);
+            const titleEn = card.querySelector('.card-title-en');
+            const btn = card.querySelector('.translate-btn');
+            const isVisible = arItems.length > 0 && arItems[0].classList.contains('show');
+            arItems.forEach(el => el.classList.toggle('show'));
+            if (titleAr) {
+                titleAr.classList.toggle('show');
+                if (titleEn) titleEn.classList.toggle('hidden');
+            }
+            if (btn) {
+                btn.textContent = isVisible ? 'ترجمة' : 'إخفاء';
+                btn.classList.toggle('active');
+            }
+        }
+
+        // ================================================================
+        //  DATA: COMMUNICATION SKILLS LECTURE
+        // ================================================================
+        const commData = {
+            titleEn: 'Lecture 1',
+            titleAr: 'المحاضرة الأولى',
+            slides: [
+                {
+                    title: 'Introduction & Definition · المقدمة والتعريف',
+                    cards: [
+                        card('Introduction · مقدمة', [
+                            { en: 'Communication is a <span class="highlight-text">basic human activity</span> and an essential professional skill in nursing.', ar: 'التواصل هو <span class="highlight-text">نشاط إنساني أساسي</span> ومهارة مهنية ضرورية في التمريض.' },
+                            { en: 'Nurses communicate with patients, families, colleagues, and other healthcare professionals throughout assessment, planning, implementation, and evaluation of care.', ar: 'يتواصل الممرضون مع المرضى والعائلات والزملاء وغيرهم من المهنيين الصحيين طوال مراحل التقييم والتخطيط والتنفيذ وتقييم الرعاية.' },
+                            { en: 'Effective communication supports <span class="highlight-text">safe care, builds trust, promotes patient participation</span>, and helps prevent misunderstandings.', ar: 'يدعم التواصل الفعال <span class="highlight-text">الرعاية الآمنة، وبناء الثقة، وتعزيز مشاركة المريض</span>، ويساعد على منع سوء الفهم.' },
+                            { en: 'Communication is more than speaking. It includes listening, interpreting words and nonverbal cues, checking understanding, documenting information, and responding appropriately.', ar: 'التواصل أكثر من مجرد التحدث. فهو يشمل الاستماع، وتفسير الكلمات والإشارات غير اللفظية، والتحقق من الفهم، وتوثيق المعلومات، والاستجابة بشكل مناسب.' }
+                        ], 'مقدمة:'),
+                        card('Definition of Communication · تعريف التواصل', [
+                            { en: 'Communication is the process of <span class="highlight-text">exchanging information, ideas, thoughts, feelings, and meaning</span> between two or more people through verbal, nonverbal, written, or electronic methods.', ar: 'التواصل هو عملية <span class="highlight-text">تبادل المعلومات والأفكار والآراء والمشاعر والمعاني</span> بين شخصين أو أكثر من خلال طرق لفظية أو غير لفظية أو مكتوبة أو إلكترونية.' }
+                        ], 'تعريف التواصل:')
+                    ]
+                },
+                {
+                    title: 'Purpose & Importance · الهدف والأهمية',
+                    cards: [
+                        card('Purpose of Communication in Nursing · الهدف من التواصل في التمريض', [
+                            { en: 'Communication is a purposeful interaction used to <span class="highlight-text">collect health information, explain care, provide emotional support, educate patients, coordinate services</span>, and promote shared understanding.', ar: 'التواصل هو تفاعل هادف يُستخدم <span class="highlight-text">لجمع المعلومات الصحية، وشرح الرعاية، وتقديم الدعم العاطفي، وتثقيف المرضى، وتنسيق الخدمات</span>، وتعزيز الفهم المشترك.' }
+                        ], 'الهدف:'),
+                        card('Importance of Communication in Nursing · أهمية التواصل في التمريض', [
+                            { en: 'Helps nurses identify patients\' physical, psychological, social, and cultural needs.', ar: 'يساعد الممرضين على تحديد الاحتياجات الجسدية والنفسية والاجتماعية والثقافية للمرضى.' },
+                            { en: 'Establishes trust between the nurse and patient.', ar: 'يبني الثقة بين الممرض والمريض.' },
+                            { en: 'Supports accurate health assessment and history taking.', ar: 'يدعم التقييم الصحي الدقيق وأخذ التاريخ المرضي.' },
+                            { en: 'Promotes understanding of procedures, medications, and care plans.', ar: 'يعزز فهم الإجراءات والأدوية وخطط الرعاية.' },
+                            { en: 'Reduces fear and anxiety by providing clear information and emotional support.', ar: 'يقلل من الخوف والقلق من خلال تقديم معلومات واضحة ودعم عاطفي.' },
+                            { en: 'Encourages patient participation in decisions and self-care.', ar: 'يشجع مشاركة المريض في القرارات والرعاية الذاتية.' },
+                            { en: 'Improves teamwork and continuity of care.', ar: 'يحسن العمل الجماعي واستمرارية الرعاية.' },
+                            { en: 'Helps prevent errors associated with incomplete or misunderstood information.', ar: 'يساعد على منع الأخطاء المرتبطة بالمعلومات غير المكتملة أو المفهومة بشكل خاطئ.' },
+                            { en: 'Supports patient dignity, privacy, and satisfaction.', ar: 'يدعم كرامة المريض وخصوصيته ورضاه.' },
+                            { en: '<span class="highlight-text">Example:</span> Before a dressing change, the nurse explains what will happen, asks whether the patient has questions, and checks understanding. This can reduce anxiety and improve cooperation.', ar: '<span class="highlight-text">مثال:</span> قبل تغيير الضمادة، تشرح الممرضة ما سيحدث، وتسأل عما إذا كان لدى المريض أسئلة، وتتحقق من فهمه. يمكن أن يقلل هذا من القلق ويحسن التعاون.' }
+                        ], 'الأهمية:')
+                    ]
+                },
+                {
+                    title: 'Elements of Communication Process · عناصر عملية التواصل',
+                    cards: [
+                        tableCard(
+                            'Elements of the Communication Process · عناصر عملية التواصل',
+                            `
+                            <table class="info-table">
+                                <thead><tr>
+                                    <th>${cell('Element', 'العنصر')}</th>
+                                    <th>${cell('Explanation', 'الشرح')}</th>
+                                </tr></thead>
+                                <tbody>
+                                    <tr><td>${cell('Sender', 'المرسل')}</td><td>${cell('The person who initiates communication, such as a nurse or patient.', 'الشخص الذي يبدأ التواصل، مثل الممرض أو المريض.')}</td></tr>
+                                    <tr><td>${cell('Encoding', 'الترميز')}</td><td>${cell('Converting thoughts or ideas into words, signs, gestures, or written symbols.', 'تحويل الأفكار أو الآراء إلى كلمات أو إشارات أو إيماءات أو رموز مكتوبة.')}</td></tr>
+                                    <tr><td>${cell('Message', 'الرسالة')}</td><td>${cell('The information, idea, feeling, or instruction being communicated.', 'المعلومات أو الفكرة أو الشعور أو التعليمات التي يتم توصيلها.')}</td></tr>
+                                    <tr><td>${cell('Channel', 'القناة')}</td><td>${cell('The method used to transmit the message, such as speech, writing, telephone, or an electronic record.', 'الطريقة المستخدمة لنقل الرسالة، مثل الكلام أو الكتابة أو الهاتف أو السجل الإلكتروني.')}</td></tr>
+                                    <tr><td>${cell('Receiver', 'المستقبل')}</td><td>${cell('The person for whom the message is intended.', 'الشخص الموجه إليه الرسالة.')}</td></tr>
+                                    <tr><td>${cell('Decoding', 'فك الترميز')}</td><td>${cell('The receiver\'s interpretation of the message.', 'تفسير المستقبل للرسالة.')}</td></tr>
+                                    <tr><td>${cell('Feedback', 'التغذية الراجعة')}</td><td>${cell('The receiver\'s response, which helps the sender assess whether the message was understood.', 'استجابة المستقبل، والتي تساعد المرسل على تقييم ما إذا كانت الرسالة قد فُهمت.')}</td></tr>
+                                    <tr><td>${cell('Noise/interference', 'الضوضاء / التداخل')}</td><td>${cell('Any factor that disrupts the message, such as loud sounds, pain, anxiety, language differences, or unclear wording.', 'أي عامل يعطل الرسالة، مثل الأصوات العالية أو الألم أو القلق أو الاختلافات اللغوية أو الصياغة غير الواضحة.')}</td></tr>
+                                </tbody>
+                            </table>
+                            `,
+                            'عناصر عملية التواصل'
+                        )
+                    ]
+                },
+                {
+                    title: 'Types of Communication · أنواع التواصل',
+                    cards: [
+                        card('A. Verbal Communication · التواصل اللفظي', [
+                            { en: 'Uses words. It includes oral communication, such as conversation and verbal handover, and written communication, such as nursing notes, care plans, and patient information leaflets.', ar: 'يستخدم الكلمات. يشمل التواصل الشفهي، مثل المحادثة والتسليم الشفهي، والتواصل المكتوب، مثل ملاحظات التمريض وخطط الرعاية والنشرات الإعلامية للمرضى.' },
+                            { en: 'Oral communication allows rapid feedback, while written communication provides a record. Both require clear, accurate, and appropriate language.', ar: 'يسمح التواصل الشفهي بتغذية راجعة سريعة، بينما يوفر التواصل المكتوب سجلاً. يتطلب كلاهما لغة واضحة ودقيقة ومناسبة.' }
+                        ], 'أ. التواصل اللفظي:'),
+                        card('B. Nonverbal Communication · التواصل غير اللفظي', [
+                            { en: 'Conveys meaning through <span class="highlight-text">facial expression, eye contact, posture</span>, gestures, personal space, touch, silence, appearance, and features of the voice such as tone and pace.', ar: 'ينقل المعنى من خلال <span class="highlight-text">تعبيرات الوجه، والتواصل البصري، ووضعية الجسم</span>، والإيماءات، والمساحة الشخصية، واللمس، والصمت، والمظهر، وخصائص الصوت مثل النبرة والسرعة.' },
+                            { en: 'Nonverbal cues should be interpreted in context because they may have different meanings for different people and cultures.', ar: 'يجب تفسير الإشارات غير اللفظية في سياقها لأنها قد تحمل معاني مختلفة لأشخاص وثقافات مختلفة.' }
+                        ], 'ب. التواصل غير اللفظي:'),
+                        card('C. Electronic Communication · التواصل الإلكتروني', [
+                            { en: 'Includes electronic health records, approved secure messaging, telehealth, and digital patient education.', ar: 'يشمل السجلات الصحية الإلكترونية، والمراسلة الآمنة المعتمدة، والرعاية الصحية عن بعد، والتثقيف الصحي الرقمي للمرضى.' },
+                            { en: 'Nurses must use authorized systems, protect confidentiality, verify recipients, and document clinical information according to policy.', ar: 'يجب على الممرضين استخدام الأنظمة المعتمدة، وحماية السرية، والتحقق من المستلمين، وتوثيق المعلومات السريرية وفقاً للسياسة.' }
+                        ], 'ج. التواصل الإلكتروني:')
+                    ]
+                },
+                {
+                    title: 'Principles of Effective Communication · مبادئ التواصل الفعال',
+                    cards: [
+                        card('The 7 Cs · مبادئ الـ 7C', [
+                            { en: '<span class="highlight-text">Clear:</span> use language that the receiver can understand.', ar: '<span class="highlight-text">واضح:</span> استخدم لغة يمكن للمستقبل فهمها.' },
+                            { en: '<span class="highlight-text">Concise:</span> avoid unnecessary words while including essential information.', ar: '<span class="highlight-text">موجز:</span> تجنب الكلمات غير الضرورية مع تضمين المعلومات الأساسية.' },
+                            { en: '<span class="highlight-text">Concrete:</span> provide specific and meaningful details.', ar: '<span class="highlight-text">محدد:</span> قدم تفاصيل محددة وذات معنى.' },
+                            { en: '<span class="highlight-text">Correct:</span> ensure that facts and instructions are accurate.', ar: '<span class="highlight-text">صحيح:</span> تأكد من دقة الحقائق والتعليمات.' },
+                            { en: '<span class="highlight-text">Complete:</span> include all information needed for the intended purpose.', ar: '<span class="highlight-text">كامل:</span> قم بتضمين جميع المعلومات اللازمة للغرض المقصود.' },
+                            { en: '<span class="highlight-text">Coherent:</span> organize information logically.', ar: '<span class="highlight-text">مترابط:</span> نظم المعلومات بشكل منطقي.' },
+                            { en: '<span class="highlight-text">Courteous:</span> communicate respectfully.', ar: '<span class="highlight-text">مهذب:</span> تواصل باحترام.' }
+                        ], 'مبادئ الـ 7C:'),
+                        card('Additional Nursing Principles · مبادئ تمريضية إضافية', [
+                            { en: 'Listen actively and avoid unnecessary interruptions.', ar: 'استمع بنشاط وتجنب المقاطعات غير الضرورية.' },
+                            { en: 'Adapt communication to the patient\'s age, language, health literacy, and needs.', ar: 'كيّف التواصل مع عمر المريض ولغته وثقافته الصحية واحتياجاته.' },
+                            { en: 'Protect privacy and confidentiality.', ar: 'احمِ الخصوصية والسرية.' },
+                            { en: 'Avoid judgmental language and unsupported reassurance.', ar: 'تجنب اللغة القضائية والطمأنة غير المدعومة.' },
+                            { en: '<span class="highlight-text">Instead of:</span> "You should not have done that." <span class="highlight-text">Say:</span> "Can you tell me what happened?"', ar: '<span class="highlight-text">بدلاً من:</span> "لم يكن يجب أن تفعل ذلك." <span class="highlight-text">قل:</span> "هل يمكنك إخباري بما حدث؟"' },
+                            { en: '<span class="highlight-text">Instead of:</span> "Don\'t worry. Everything will be fine." <span class="highlight-text">Say:</span> "I understand your concern. We will assess your condition and explain the next steps."', ar: '<span class="highlight-text">بدلاً من:</span> "لا تقلق. كل شيء سيكون على ما يرام." <span class="highlight-text">قل:</span> "أتفهم قلقك. سنقوم بتقييم حالتك وشرح الخطوات التالية."' },
+                            { en: 'Invite questions and confirm understanding.', ar: 'ادعُ للأسئلة وتأكد من الفهم.' },
+                            { en: 'Use accurate documentation and structured handover.', ar: 'استخدم التوثيق الدقيق والتسليم المنظم.' },
+                            { en: 'Maintain professional boundaries and communicate honestly.', ar: 'حافظ على الحدود المهنية وتواصل بصدق.' }
+                        ], 'مبادئ إضافية:')
+                    ]
+                },
+                {
+                    title: 'Factors Affecting Communication · العوامل المؤثرة في التواصل',
+                    cards: [
+                        card('Personal & Psychological · شخصية ونفسية', [
+                            { en: 'Education and health literacy.', ar: 'التعليم والثقافة الصحية.' },
+                            { en: 'Beliefs, attitudes, and previous experiences.', ar: 'المعتقدات والمواقف والخبرات السابقة.' },
+                            { en: 'Example: A patient who had a painful experience during a previous procedure may feel afraid of undergoing another procedure.', ar: 'مثال: المريض الذي عانى من تجربة مؤلمة أثناء إجراء سابق قد يشعر بالخوف من الخضوع لإجراء آخر.' },
+                            { en: 'Fear, anger, anxiety, grief, or embarrassment.', ar: 'الخوف والغضب والقلق والحزن أو الإحراج.' }
+                        ], 'شخصية ونفسية:'),
+                        card('Physiological · فسيولوجية', [
+                            { en: 'Pain, fatigue, shortness of breath.', ar: 'الألم والإرهاق وضيق التنفس.' },
+                            { en: 'Hearing, vision, or speech difficulties.', ar: 'صعوبات السمع أو الرؤية أو النطق.' },
+                            { en: 'Illness or medication effects on alertness.', ar: 'تأثيرات المرض أو الأدوية على اليقظة.' }
+                        ], 'فسيولوجية:'),
+                        card('Environmental · بيئية', [
+                            { en: 'Noise, interruptions, and lack of privacy.', ar: 'الضوضاء والمقاطعات ونقص الخصوصية.' },
+                            { en: 'Uncomfortable surroundings or excessive distance.', ar: 'محيط غير مريح أو مسافة مفرطة.' }
+                        ], 'بيئية:'),
+                        card('Cultural & Language · ثقافية ولغوية', [
+                            { en: 'Language differences.', ar: 'الاختلافات اللغوية.' },
+                            { en: 'Different meanings of gestures and eye contact.', ar: 'معاني مختلفة للإيماءات والتواصل البصري.' },
+                            { en: 'Different beliefs about illness, treatment, and personal space.', ar: 'معتقدات مختلفة حول المرض والعلاج والمساحة الشخصية.' }
+                        ], 'ثقافية ولغوية:'),
+                        card('Professional & Organizational · مهنية وتنظيمية', [
+                            { en: 'Use of medical jargon.', ar: 'استخدام المصطلحات الطبية.' },
+                            { en: 'Heavy workload and time pressure.', ar: 'عبء العمل الثقيل وضغط الوقت.' },
+                            { en: 'Poor teamwork or incomplete handover.', ar: 'ضعف العمل الجماعي أو التسليم غير المكتمل.' },
+                            { en: 'Failure to check understanding.', ar: 'الفشل في التحقق من الفهم.' }
+                        ], 'مهنية وتنظيمية:')
+                    ]
+                },
+                {
+                    title: 'Basic Communication Skills · مهارات التواصل الأساسية للممرضين',
+                    cards: [
+                        card('Active Listening · الاستماع النشط', [
+                            { en: 'Giving full attention to the speaker, observing cues, and responding to the meaning of the message.', ar: 'إعطاء الاهتمام الكامل للمتحدث، ومراقبة الإشارات، والاستجابة لمعنى الرسالة.' },
+                            { en: '<span class="highlight-text">Example:</span> "You mentioned that the pain is worse at night. Can you tell me more?"', ar: '<span class="highlight-text">مثال:</span> "لقد ذكرت أن الألم يزداد سوءاً في الليل. هل يمكنك إخباري المزيد؟"' }
+                        ], 'الاستماع النشط:'),
+                        card('Open-ended & Closed-ended Questions · الأسئلة المفتوحة والمغلقة', [
+                            { en: '<span class="highlight-text">Open-ended:</span> Encourage a detailed response. (e.g., "How have you been feeling since yesterday?")', ar: '<span class="highlight-text">مفتوحة:</span> تشجع على استجابة مفصلة. (مثال: "كيف كنت تشعر منذ أمس؟")' },
+                            { en: '<span class="highlight-text">Closed-ended:</span> Seek a specific answer, often useful for focused assessment. (e.g., "Do you have a fever?")', ar: '<span class="highlight-text">مغلقة:</span> تبحث عن إجابة محددة، وغالباً ما تكون مفيدة للتقييم المركز. (مثال: "هل لديك حمى؟")' }
+                        ], 'الأسئلة المفتوحة والمغلقة:'),
+                        card('Clarification & Reflection · التوضيح والانعكاس', [
+                            { en: '<span class="highlight-text">Clarification:</span> Checks the meaning of an unclear statement. (e.g., "When you say dizzy, do you mean that the room spins or that you feel faint?")', ar: '<span class="highlight-text">التوضيح:</span> يتحقق من معنى عبارة غير واضحة. (مثال: "عندما تقول دوخة، هل تعني أن الغرفة تدور أم أنك تشعر بالإغماء؟")' },
+                            { en: '<span class="highlight-text">Reflection:</span> Reflects a patient\'s feelings or concerns to encourage further discussion. (e.g., "You seem worried about returning home.")', ar: '<span class="highlight-text">الانعكاس:</span> يعكس مشاعر المريض أو مخاوفه لتشجيع مزيد من المناقشة. (مثال: "يبدو أنك قلق بشأن العودة إلى المنزل.")' }
+                        ], 'التوضيح والانعكاس:'),
+                        card('Summarizing, Empathy & Silence · التلخيص، التعاطف، الصمت', [
+                            { en: '<span class="highlight-text">Summarizing:</span> Reviews the main points to check shared understanding. (e.g., "You have had pain since yesterday, and it worsens when you move. Is that correct?")', ar: '<span class="highlight-text">التلخيص:</span> يراجع النقاط الرئيسية للتحقق من الفهم المشترك. (مثال: "لديك ألم منذ أمس، ويزداد سوءاً عندما تتحرك. هل هذا صحيح؟")' },
+                            { en: '<span class="highlight-text">Empathy:</span> Acknowledges and seeks to understand the patient\'s experience. (e.g., "I can understand why waiting for the results feels stressful.")', ar: '<span class="highlight-text">التعاطف:</span> يقر ويسعى لفهم تجربة المريض. (مثال: "أستطيع أن أفهم لماذا يبدو الانتظار للحصول على النتائج مرهقاً.")' },
+                            { en: '<span class="highlight-text">Silence:</span> Allows time to think or express emotion without pressure.', ar: '<span class="highlight-text">الصمت:</span> يسمح بالوقت للتفكير أو التعبير عن المشاعر دون ضغط.' },
+                            { en: '<span class="highlight-text">Example:</span> Remain present and attentive while a distressed patient gathers their thoughts.', ar: '<span class="highlight-text">مثال:</span> ابقَ حاضراً ومنتبهاً بينما يجمع المريض المضطرب أفكاره.' }
+                        ], 'التلخيص، التعاطف، الصمت:')
+                    ]
+                }
+            ]
+        };
+
+        // ================================================================
+        //  BUILD APP
+        // ================================================================
+        const slidesData = { comm: commData };
+        const sectionOrder = ['comm'];
+
+        function renderSlideContent(slide) {
+            if (slide.cards && Array.isArray(slide.cards)) {
+                return createSlideHTML(slide.title, slide.cards.join(''));
+            }
+            return createSlideHTML(slide.title, '');
+        }
+
+        function buildApp() {
+            const tabsContainer = document.getElementById('tabsContainer');
+            const sectionsContainer = document.getElementById('sectionsContainer');
+
+            sectionOrder.forEach((secId) => {
+                const sec = slidesData[secId];
+                if (!sec) return;
+
+                const tab = document.createElement('button');
+                tab.className = 'tab-btn active';
+                tab.innerHTML = `<span class="en">${sec.titleEn}</span><span class="ar">${sec.titleAr}</span>`;
+                tabsContainer.appendChild(tab);
+
+                const cardEl = document.createElement('div');
+                cardEl.className = 'card active';
+                cardEl.id = `section-${secId}`;
+
+                const slidesHTML = sec.slides.map(s => renderSlideContent(s)).join('');
+                const totalSlides = sec.slides.length;
+
+                cardEl.innerHTML = `
+                    <h2>${sec.titleEn} · ${sec.titleAr}</h2>
+                    <div class="slide-container" id="slideContainer-${secId}">
+                        <div class="slide-progress">
+                            <span style="font-weight:600;">التقدم</span>
+                            <div class="bar"><div class="fill" style="width:0%;"></div></div>
+                            <span class="count">1 / ${totalSlides}</span>
+                        </div>
+                        ${slidesHTML}
+                        <div class="slide-nav">
+                            <button class="btn-nav prev" onclick="goToSlide('${secId}', 'slideContainer-${secId}', slideState['${secId}'].current - 1)">السابق</button>
+                            <button class="btn-nav next primary" onclick="goToSlide('${secId}', 'slideContainer-${secId}', slideState['${secId}'].current + 1)">التالي</button>
+                        </div>
+                    </div>
+                `;
+                sectionsContainer.appendChild(cardEl);
+
+                initSlideState(secId, totalSlides);
+                setTimeout(() => renderSlide(secId, `slideContainer-${secId}`), 50);
+            });
+        }
+
+        // ================================================================
+        //  INIT
+        // ================================================================
+        applyTheme(localStorage.getItem('theme') || 'dark');
+        buildApp();
+
+        window.goToSlide = goToSlide;
+        window.slideState = slideState;
+        window.toggleTheme = toggleTheme;
+        window.toggleCardTranslation = toggleCardTranslation;
+    </script>
+</body>
+</html>
